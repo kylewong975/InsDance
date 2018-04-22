@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Particles from 'react-particles-js';
+import { Container, Row, Col } from 'reactstrap';
 
 export default class App extends Component {
   render() {
@@ -36,9 +37,16 @@ export default class App extends Component {
             marginTop: -20,
           }}
         />
-        <div style={styles.canvas}>
-          <p>Hello</p>
-        </div>
+        <Container fluid style={styles.canvas}>
+          <Row>
+            <Col xs="9">
+              <p style={styles.desc}>Hello</p>
+            </Col>
+            <Col xs="3">
+              <p style={styles.desc}>World</p>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
@@ -46,6 +54,11 @@ export default class App extends Component {
 
 let styles = {
   canvas: {
-    color: "white"
+    marginTop: 20,
+    marginLeft: 25,
+  },
+  desc: {
+    color: "#ffffff",
+    fontSize: 24,
   }
 }
