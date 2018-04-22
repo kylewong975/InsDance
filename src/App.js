@@ -43,20 +43,13 @@ export default class App extends Component {
         <Container fluid style={styles.canvas}>
           <Row>
             <Col xs="8">
-              <p style={styles.desc}>Hello</p>
+              <Webcam style={{ marginTop: 50, marginBottom: -50 }} audio={false} height="90%" width="100%" />
             </Col>
             <Col xs="4">
               <Stats />
             </Col>
           </Row>
         </Container>
-        <Grid>
-          <Row>
-              <Col xsOffset={3} xs={6}>
-                  <Webcam style={{ }} audio={false} height={360} width={480} />
-              </Col>
-          </Row>
-        </Grid>
       </div>
     );
   }
