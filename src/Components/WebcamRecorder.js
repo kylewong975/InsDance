@@ -13,6 +13,7 @@ export default class WebcamRecorder extends React.Component {
               alreadyRecorded: false,
               seconds: 5
 		};
+        this.timer = 0;
 
 		this.handleGranted = this.handleGranted.bind(this);
 		this.handleDenied = this.handleDenied.bind(this);
@@ -62,16 +63,18 @@ export default class WebcamRecorder extends React.Component {
 		console.log('Permission Denied!', err);
 	}
 	handleStart(stream) {
-        // while (this.timer != 0)
         // this.startTimer();  // start recording while timer == 0
 
-		this.setState({
-			recording: true,
-      alreadyRecorded: true,
-		});
+		let startDelay = 5000;
 
-		this.setStreamToVideo(stream);
-		console.log('Recording Started.');
+        setTimeout(() => {
+                this.setState({
+                    recording: true,
+                    alreadyRecorded: true
+                });
+                this.setStreamToVideo(stream);
+                console.log('Recording Started.');
+        }, startDelay);
 	}
 	handleStop(blob) {
 		this.setState({
