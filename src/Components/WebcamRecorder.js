@@ -134,7 +134,7 @@ export default class WebcamRecorder extends React.Component {
 		a.click();
 	}
   analyze() {
-    fetch("", {
+    fetch("http://f7682849.ngrok.io", {
       method: 'post',
       body: JSON.stringify({ link: this.state.blobURL })
     })
