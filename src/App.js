@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Particles from 'react-particles-js';
+import Webcam from 'react-webcam'
+import { Grid, Row, Col } from 'react-bootstrap';
 
 export default class App extends Component {
   render() {
     return (
+    <div>
       <Particles
         params={{
           particles: {
@@ -30,6 +33,14 @@ export default class App extends Component {
           backgroundColor: "#1c222b"
         }}
       />
+          <Grid>
+            <Row>
+                <Col xsOffset={3} xs={6}>
+                    <Webcam style={{ }} audio={false} height={360} width={480} />
+                </Col>
+            </Row>
+          </Grid>
+      </div>
     );
   }
 }
