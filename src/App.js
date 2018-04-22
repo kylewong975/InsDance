@@ -6,6 +6,7 @@ import Webcam from 'react-webcam'
 import { Container, Row, Col } from 'reactstrap'
 import { Grid } from 'react-bootstrap';
 import Stats from './Components/Stats';
+import WebcamRecorder from './Components/WebcamRecorder';
 import ReactWebCamCapture from 'react-webcam-capture';
 
 export default class App extends Component {
@@ -89,40 +90,13 @@ export default class App extends Component {
           <Row>
             <Col xs="8">
               <WebcamRecorder storeData={this.getData}/>
-              <p style={styles.desc}>Related Youtube video: {this.state.chosenVideoLink}</p>
+              <p style={styles.desc}>Related Youtube video: </p><a href={this.state.chosenVideoLink} style={styles.desc} target="_blank">{this.state.chosenVideoLink}</a>
             </Col>
             <Col xs="4">
               <Stats danceType={this.state.chosenVideoType}/>
             </Col>
           </Row>
         </Container>
-
-        <ReactWebCamCapture
-          constraints={{ audio: true, video: true }}
-          timeSlice={10}
-          onGranted={this.handleGranted}
-          onDenied={this.handleDenied}
-          onStart={this.handleStart}
-          onStop={this.handleStop}
-          onPause={this.handlePause}
-          onResume={this.handleResume}
-          onError={this.handleError}
-          render={({ start, stop, pause, resume }) =>
-          <div>
-            <p>Granted:</p>
-            <p>Rejected Reason: </p>
-            <p>Recording: </p>
-            <p>Paused: </p>
-
-            <button onClick={start}>Start</button>
-            <button onClick={stop}>Stop</button>
-            <button onClick={pause}>Pause</button>
-            <button onClick={resume}>Resume</button>
-
-            <p>Streaming test</p>
-            <video autoPlay></video>
-          </div>
-      } />
       </div>
     );
   }

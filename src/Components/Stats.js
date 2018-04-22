@@ -6,8 +6,25 @@ export default class Stats extends React.Component {
     this.state = {
       score: 0,
       maxScore: 0,
-      dance: "Undetermined Dance"
+      prevDance: "",
     }
+
+    setInterval(() => {
+      if(this.props.danceType != this.state.prevDance) {
+        let s = Math.floor(Math.random() * 325) / 1000 * 1000 * 1000;
+        this.setState({
+          score: s,
+          prevDance: this.props.danceType
+        });
+        if(this.state.maxScore < s) {
+          this.setState({
+            maxScore: s
+          });
+        }
+      }
+      //console.log(this.state.chosenVideoLink);
+      //console.log(this.state.chosenVideoType);
+    }, 5000);
   }
 
   render() {

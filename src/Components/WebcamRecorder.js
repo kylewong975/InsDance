@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'reactstrap';
 import MediaCapturer from 'react-multimedia-capture';
 
 export default class WebcamRecorder extends React.Component {
@@ -106,8 +107,7 @@ export default class WebcamRecorder extends React.Component {
 		const paused = this.state.paused;
 
 		return (
-			<div ref="app">
-				<h3>Video Recorder</h3>
+			<div ref="app" style={styles.container}>
 				<MediaCapturer
 					constraints={{ audio: true, video: true }}
 					timeSlice={10}
@@ -119,21 +119,40 @@ export default class WebcamRecorder extends React.Component {
 					onResume={this.handleResume}
 					onError={this.handleError}
 					render={({ start, stop, pause, resume }) =>
-					<div>
+					<div style={{display: "flex", flexDirection: "column"}}>
 						<p>Granted: {granted.toString()}</p>
 						<p>Rejected Reason: {rejectedReason}</p>
 						<p>Recording: {recording.toString()}</p>
 						<p>Paused: {paused.toString()}</p>
-						<button onClick={start}>Start</button>
-						<button onClick={stop}>Stop</button>
-						<button onClick={pause}>Pause</button>
-						<button onClick={resume}>Resume</button>
-
-						<p>Streaming test</p>
-						<video autoPlay></video>
+            <Container>
+              <Row>
+    						<button onClick={start} style={styles.buttonControls}>Start Video</button>
+    						<button onClick={stop} style={styles.buttonControls}>Stop Video</button>
+              </Row>
+              <Row>
+                <button onClick={pause} style={styles.buttonControls}>Pause Video</button>
+    						<button onClick={resume} style={styles.buttonControls}>Resume Video</button>
+              </Row>
+            </Container>
+						<video autoPlay style={{marginTop: 25}}></video>
 					</div>
 				} />
 			</div>
 		);
 	}
+}
+
+let styles = {
+  container: {
+    marginTop: "-15%",
+    marginBottom: "10%"
+  },
+  buttonControls: {
+    borderRadius: 4,
+    width: "50%",
+    backgroundColor: "#18405c",
+    border: "1px solid white",
+    color: "#ffffff",
+    padding: 5
+  }
 }
