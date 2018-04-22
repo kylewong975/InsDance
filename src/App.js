@@ -33,20 +33,21 @@ export default class App extends Component {
       chosenVideoLink: "",
       loadedVideo: false,
       ind: 0,
-      localFile: "../src/saved_videos/hustle.mp4"
+      analyze: false,
+      alocalFile: "../src/videos/hustle.mp4"
     }
 
     setInterval(() => {
       if(this.state.loadedVideo == true) {
         let randrange = this.state.videoLink.length;
-        let ind = this.state.ind % randrange; //Math.floor(Math.random() * randrange);
+        let ind = Math.floor(this.state.ind % randrange); //Math.floor(Math.random() * randrange);
         //console.log(ind);
         this.setState({
           ind: ind + 1,
           loadedVideo: false,
           chosenVideoType: this.state.videoType[ind],
           chosenVideoLink: this.state.videoLink[ind],
-          localFile: "../src/saved_videos/" + this.state.localFile[ind],
+          alocalFile: "../src/videos/" + this.state.localFile[ind],
         })
       }
       //console.log(this.state.chosenVideoLink);
@@ -54,6 +55,7 @@ export default class App extends Component {
     }, 5000);
 
     this.getData = this.getData.bind(this);
+    this.getAnalyze = this.getAnalyze.bind(this);
   }
 
   getData(data) {
@@ -61,6 +63,12 @@ export default class App extends Component {
       loadedVideo: data
     })
     console.log(data);
+  }
+
+  getAnalyze(data) {
+    this.setState({
+      analyze: data
+    })
   }
 
   render() {
@@ -96,15 +104,11 @@ export default class App extends Component {
         <Container fluid style={styles.canvas}>
           <Row>
             <Col xs="8">
-              <WebcamRecorder storeData={this.getData}/>
+              <WebcamRecorder storeData={this.getData} analyze={this.getAnalyze}/>
               <p style={styles.desc}>Related Youtube video: </p><a href={this.state.chosenVideoLink} style={styles.desc} target="_blank">{this.state.chosenVideoLink}</a>
             </Col>
             <Col xs="4">
-              <Stats danceType={this.state.chosenVideoType}/>
-              <video width="320" height="240" controls autoplay>
-                  <source src={this.state.localFile} type="video/mp4"/>
-                  Your browser does not support the video tag.
-              </video>
+              <Stats danceType={this.state.chosenVideoType} analyze={this.state.analyze}/>
             </Col>
           </Row>
         </Container>
@@ -124,3 +128,9 @@ let styles = {
   }
 }
 // <Webcam style={{ marginTop: 50, marginBottom: -50 }} audio={false} height="90%" width="100%" />
+/*
+<video width="320" height="240" controls autoplay>
+    <source src={this.state.alocalFile} type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+*/

@@ -13,6 +13,7 @@ export default class WebcamRecorder extends React.Component {
       alreadyRecorded: false,
       seconds: 5,
       blobURL: "",
+      analyze: true,
 		};
         this.timer = 0;
 
@@ -137,7 +138,8 @@ export default class WebcamRecorder extends React.Component {
     fetch("http://f7682849.ngrok.io", {
       method: 'post',
       body: JSON.stringify({ link: this.state.blobURL })
-    })
+    });
+    this.props.analyze(this.state.analyze);
     console.log(this.state.blobURL)
   }
 	render() {

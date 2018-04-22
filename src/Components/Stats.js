@@ -10,7 +10,7 @@ export default class Stats extends React.Component {
     }
 
     setInterval(() => {
-      if(this.props.danceType != this.state.prevDance) {
+      if(this.props.danceType != this.state.prevDance && this.props.analyze == true) {
         let s = Math.floor(Math.random() * 325) / 1000 * 1000 * 1000;
         this.setState({
           score: s,
@@ -22,7 +22,7 @@ export default class Stats extends React.Component {
           });
         }
       }
-    }, 5000);
+    }, 15000);
   }
 
   render() {
