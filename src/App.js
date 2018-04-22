@@ -11,8 +11,12 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoType: ["Moonwalk", "Cha Cha", "Dougie", "Salsa", "Tango", "Flamenco", "Hustle", "Tap Dance", "Charleston", "Samba"],
-      videoLink: ["https://www.youtube.com/watch?v=tjaT1bZ78Qs",
+      videoType: ["Hustle", "Salsa", "Samba", "Moonwalk", "Cha Cha", "Dougie", "Salsa", "Tango", "Flamenco", "Hustle", "Tap Dance", "Charleston", "Samba"],
+      videoLink: [
+        "https://www.youtube.com/watch?v=G0g6pq8wK5k",
+        "https://www.youtube.com/watch?v=EqwFL_0Y_Zk",
+        "https://www.youtube.com/watch?v=UCzOuCis9SU",
+        "https://www.youtube.com/watch?v=tjaT1bZ78Qs",
         "https://www.youtube.com/watch?v=kmakB53NFow",
         "https://www.youtube.com/watch?v=OvQ2jpVi07E",
         "https://www.youtube.com/watch?v=G0g6pq8wK5k",
@@ -26,13 +30,16 @@ export default class App extends Component {
       chosenVideoType: "",
       chosenVideoLink: "",
       loadedVideo: false,
+      ind: 0
     }
 
     setInterval(() => {
       if(this.state.loadedVideo == true) {
-        let ind = Math.floor(Math.random() * this.state.videoLink.length);
+        let randrange = this.state.videoLink.length;
+        let ind = this.state.ind % randrange; //Math.floor(Math.random() * randrange);
         //console.log(ind);
         this.setState({
+          ind: ind + 1,
           loadedVideo: false,
           chosenVideoType: this.state.videoType[ind],
           chosenVideoLink: this.state.videoLink[ind],

@@ -25,9 +25,9 @@ export default class WebcamRecorder extends React.Component {
 		this.setStreamToVideo = this.setStreamToVideo.bind(this);
 		this.releaseStreamFromVideo = this.releaseStreamFromVideo.bind(this);
 		this.downloadVideo = this.downloadVideo.bind(this);
-    this.analyze = this.analyze.bind(this);
-    this.countDown = this.countDown.bind(this);
-    this.startTimer = this.startTimer.bind(this);
+        this.analyze = this.analyze.bind(this);
+        this.countDown = this.countDown.bind(this);
+        this.startTimer = this.startTimer.bind(this);
 
     setInterval(() => {
       if(this.state.alreadyRecorded == true && this.state.recording == false) {
