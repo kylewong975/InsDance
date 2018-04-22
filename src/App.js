@@ -11,11 +11,13 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoType: ["Hustle", "Salsa", "Samba", "Moonwalk", "Cha Cha", "Dougie", "Salsa", "Tango", "Flamenco", "Hustle", "Tap Dance", "Charleston", "Samba"],
+      videoType: ["Hustle", "Salsa", "Samba", "Flamenco", "Moonwalk", "Cha Cha", "Dougie", "Salsa", "Tango", "Flamenco", "Hustle", "Tap Dance", "Charleston", "Samba"],
+      localFile: ['hustle.mp4', 'salsa.mp4', 'samba.mp4', 'flamenco.mp4', 'moonwalk.mp4', 'chacha.mp4', 'dougie.mp4', 'salsa.mp4', 'tango.mp4', 'flamenco.mp4', 'hustle.mp4', 'tapdance.mp4', 'charleston.mp4', 'samba.mp4'],
       videoLink: [
         "https://www.youtube.com/watch?v=G0g6pq8wK5k",
         "https://www.youtube.com/watch?v=EqwFL_0Y_Zk",
         "https://www.youtube.com/watch?v=UCzOuCis9SU",
+        "https://www.youtube.com/watch?v=0VLMyr7MFTA",
         "https://www.youtube.com/watch?v=tjaT1bZ78Qs",
         "https://www.youtube.com/watch?v=kmakB53NFow",
         "https://www.youtube.com/watch?v=OvQ2jpVi07E",
@@ -30,7 +32,8 @@ export default class App extends Component {
       chosenVideoType: "",
       chosenVideoLink: "",
       loadedVideo: false,
-      ind: 0
+      ind: 0,
+      localFile: "../src/saved_videos/hustle.mp4"
     }
 
     setInterval(() => {
@@ -43,6 +46,7 @@ export default class App extends Component {
           loadedVideo: false,
           chosenVideoType: this.state.videoType[ind],
           chosenVideoLink: this.state.videoLink[ind],
+          localFile: "../src/saved_videos/" + this.state.localFile[ind],
         })
       }
       //console.log(this.state.chosenVideoLink);
@@ -97,6 +101,10 @@ export default class App extends Component {
             </Col>
             <Col xs="4">
               <Stats danceType={this.state.chosenVideoType}/>
+              <video width="320" height="240" controls autoplay>
+                  <source src={this.state.localFile} type="video/mp4"/>
+                  Your browser does not support the video tag.
+              </video>
             </Col>
           </Row>
         </Container>
