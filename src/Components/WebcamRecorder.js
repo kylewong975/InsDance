@@ -11,6 +11,7 @@ export default class WebcamRecorder extends React.Component {
 			recording: false,
 			paused: false,
       alreadyRecorded: false,
+      blobURL: "",
 		};
 
 		this.handleGranted = this.handleGranted.bind(this);
@@ -22,6 +23,7 @@ export default class WebcamRecorder extends React.Component {
 		this.setStreamToVideo = this.setStreamToVideo.bind(this);
 		this.releaseStreamFromVideo = this.releaseStreamFromVideo.bind(this);
 		this.downloadVideo = this.downloadVideo.bind(this);
+    this.analyze = this.analyze.bind(this);
 
     setInterval(() => {
       if(this.state.alreadyRecorded == true && this.state.recording == false) {
@@ -98,8 +100,20 @@ export default class WebcamRecorder extends React.Component {
 		a.target = '_blank';
 		document.body.appendChild(a);
 
+    this.setState({
+      blobURL: url.substring(27) + ".webm"
+    });
+    //console.log(url.substring(27) + ".webm")
+
 		a.click();
 	}
+  analyze() {
+    fetch("", {
+      method: 'post',
+      body: JSON.stringify({ link: this.state.blobURL })
+    })
+    console.log(this.state.blobURL)
+  }
 	render() {
 		const granted = this.state.granted;
 		const rejectedReason = this.state.rejectedReason;
@@ -118,6 +132,7 @@ export default class WebcamRecorder extends React.Component {
 					onPause={this.handlePause}
 					onResume={this.handleResume}
 					onError={this.handleError}
+          mimeType="video/mp4"
 					render={({ start, stop, pause, resume }) =>
 					<div style={{display: "flex", flexDirection: "column"}}>
 						<p>Granted: {granted.toString()}</p>
@@ -134,6 +149,7 @@ export default class WebcamRecorder extends React.Component {
     						<button onClick={resume} style={styles.buttonControls}>Resume Video</button>
               </Row>
             </Container>
+            <button onClick={this.analyze} style={styles.buttonControls}>Analyze Video</button>
 						<video autoPlay style={{marginTop: 25}}></video>
 					</div>
 				} />
