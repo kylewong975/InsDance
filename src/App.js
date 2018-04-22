@@ -44,7 +44,7 @@ export default class App extends Component {
         <Container fluid style={styles.canvas}>
           <Row>
             <Col xs="8">
-              <Webcam style={{ marginTop: 50, marginBottom: -50 }} audio={false} height="90%" width="100%" />
+              <WebcamRecorder />
             </Col>
             <Col xs="4">
               <Stats />
@@ -93,3 +93,4 @@ let styles = {
     fontSize: 24,
   }
 }
+// <Webcam style={{ marginTop: 50, marginBottom: -50 }} audio={false} height="90%" width="100%" />
