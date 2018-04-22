@@ -3,7 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import Particles from 'react-particles-js';
 import Webcam from 'react-webcam'
-import { Container, Grid, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'reactstrap'
+import { Grid } from 'react-bootstrap';
+import Stats from './Components/Stats';
 
 export default class App extends Component {
   render() {
@@ -40,11 +42,11 @@ export default class App extends Component {
         />
         <Container fluid style={styles.canvas}>
           <Row>
-            <Col xs="9">
+            <Col xs="8">
               <p style={styles.desc}>Hello</p>
             </Col>
-            <Col xs="3">
-              <p style={styles.desc}>World</p>
+            <Col xs="4">
+              <Stats />
             </Col>
           </Row>
         </Container>
