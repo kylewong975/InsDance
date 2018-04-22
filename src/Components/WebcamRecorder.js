@@ -14,6 +14,7 @@ export default class WebcamRecorder extends React.Component {
       seconds: 5,
       blobURL: "",
 		};
+        this.timer = 0;
 
 		this.handleGranted = this.handleGranted.bind(this);
 		this.handleDenied = this.handleDenied.bind(this);
@@ -64,16 +65,18 @@ export default class WebcamRecorder extends React.Component {
 		console.log('Permission Denied!', err);
 	}
 	handleStart(stream) {
-        // while (this.timer != 0)
         // this.startTimer();  // start recording while timer == 0
 
-		this.setState({
-			recording: true,
-      alreadyRecorded: true,
-		});
+		let startDelay = 1;
 
-		this.setStreamToVideo(stream);
-		console.log('Recording Started.');
+        setTimeout(() => {
+                this.setState({
+                    recording: true,
+                    alreadyRecorded: true
+                });
+                this.setStreamToVideo(stream);
+                console.log('Recording Started.');
+        }, startDelay);
 	}
 	handleStop(blob) {
 		this.setState({
@@ -123,15 +126,15 @@ export default class WebcamRecorder extends React.Component {
 		a.target = '_blank';
 		document.body.appendChild(a);
 
-    this.setState({
-      blobURL: url.substring(27) + ".webm"
-    });
-    //console.log(url.substring(27) + ".webm")
+        this.setState({
+          blobURL: url.substring(27) + ".webm"
+        });
+        //console.log(url.substring(27) + ".webm")
 
 		a.click();
 	}
   analyze() {
-    fetch("", {
+    fetch("http://f7682849.ngrok.io", {
       method: 'post',
       body: JSON.stringify({ link: this.state.blobURL })
     })

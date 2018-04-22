@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Particles from 'react-particles-js';
-import Webcam from 'react-webcam'
 import { Container, Row, Col } from 'reactstrap'
-import { Grid } from 'react-bootstrap';
+// import { Grid } from 'react-bootstrap';
 import Stats from './Components/Stats';
 import WebcamRecorder from './Components/WebcamRecorder';
-import ReactWebCamCapture from 'react-webcam-capture';
 
 export default class App extends Component {
   constructor(props) {
@@ -80,8 +78,6 @@ export default class App extends Component {
             height: "100%",
             backgroundColor: "#1c222b",
             position: "absolute",
-            width: "100%",
-            height: "100%",
             zIndex: -1,
             marginTop: -20,
           }}

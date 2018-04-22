@@ -22,8 +22,6 @@ export default class Stats extends React.Component {
           });
         }
       }
-      //console.log(this.state.chosenVideoLink);
-      //console.log(this.state.chosenVideoType);
     }, 5000);
   }
 
