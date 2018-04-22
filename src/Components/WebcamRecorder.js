@@ -10,8 +10,9 @@ export default class WebcamRecorder extends React.Component {
 			rejectedReason: '',
 			recording: false,
 			paused: false,
-              alreadyRecorded: false,
-              seconds: 5
+      alreadyRecorded: false,
+      seconds: 5,
+      blobURL: "",
 		};
         this.timer = 0;
 
@@ -24,8 +25,9 @@ export default class WebcamRecorder extends React.Component {
 		this.setStreamToVideo = this.setStreamToVideo.bind(this);
 		this.releaseStreamFromVideo = this.releaseStreamFromVideo.bind(this);
 		this.downloadVideo = this.downloadVideo.bind(this);
-        this.countDown = this.countDown.bind(this);
-        this.startTimer = this.startTimer.bind(this);
+    this.analyze = this.analyze.bind(this);
+    this.countDown = this.countDown.bind(this);
+    this.startTimer = this.startTimer.bind(this);
 
     setInterval(() => {
       if(this.state.alreadyRecorded == true && this.state.recording == false) {
@@ -124,8 +126,20 @@ export default class WebcamRecorder extends React.Component {
 		a.target = '_blank';
 		document.body.appendChild(a);
 
+    this.setState({
+      blobURL: url.substring(27) + ".webm"
+    });
+    //console.log(url.substring(27) + ".webm")
+
 		a.click();
 	}
+  analyze() {
+    fetch("", {
+      method: 'post',
+      body: JSON.stringify({ link: this.state.blobURL })
+    })
+    console.log(this.state.blobURL)
+  }
 	render() {
 		const granted = this.state.granted;
 		const rejectedReason = this.state.rejectedReason;
@@ -144,6 +158,7 @@ export default class WebcamRecorder extends React.Component {
 					onPause={this.handlePause}
 					onResume={this.handleResume}
 					onError={this.handleError}
+          mimeType="video/mp4"
 					render={({ start, stop, pause, resume }) =>
 					<div style={{display: "flex", flexDirection: "column"}}>
 						<p>Granted: {granted.toString()}</p>
@@ -159,10 +174,8 @@ export default class WebcamRecorder extends React.Component {
                 <button onClick={pause} style={styles.buttonControls}>Pause Video</button>
     						<button onClick={resume} style={styles.buttonControls}>Resume Video</button>
               </Row>
-              <Row>
-                <h2> s: {this.state.seconds} </h2>
-              </Row>
             </Container>
+            <button onClick={this.analyze} style={styles.buttonControls}>Analyze Video</button>
 						<video autoPlay style={{marginTop: 25}}></video>
 					</div>
 				} />
@@ -185,3 +198,9 @@ let styles = {
     padding: 5
   }
 }
+
+/*
+<Row>
+  <h2 style={{color: "#ffffff"}}> s: {this.state.seconds} </h2>
+</Row>
+*/
