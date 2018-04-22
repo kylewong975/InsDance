@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Particles from 'react-particles-js';
+import Stats from './Components/Stats';
 import { Container, Row, Col } from 'reactstrap';
 
 export default class App extends Component {
@@ -39,11 +40,11 @@ export default class App extends Component {
         />
         <Container fluid style={styles.canvas}>
           <Row>
-            <Col xs="9">
+            <Col xs="8">
               <p style={styles.desc}>Hello</p>
             </Col>
-            <Col xs="3">
-              <p style={styles.desc}>World</p>
+            <Col xs="4">
+              <Stats />
             </Col>
           </Row>
         </Container>
