@@ -8,7 +8,8 @@ export default class WebcamRecorder extends React.Component {
 			granted: false,
 			rejectedReason: '',
 			recording: false,
-			paused: false
+			paused: false,
+      alreadyRecorded: false,
 		};
 
 		this.handleGranted = this.handleGranted.bind(this);
@@ -20,6 +21,16 @@ export default class WebcamRecorder extends React.Component {
 		this.setStreamToVideo = this.setStreamToVideo.bind(this);
 		this.releaseStreamFromVideo = this.releaseStreamFromVideo.bind(this);
 		this.downloadVideo = this.downloadVideo.bind(this);
+
+    setInterval(() => {
+      if(this.state.alreadyRecorded == true && this.state.recording == false) {
+        this.props.storeData(this.state.alreadyRecorded);
+        this.setState({
+          alreadyRecorded: false,
+        });
+        console.log("stored")
+      }
+    }, 5000);
 	}
 	handleGranted() {
 		this.setState({ granted: true });
@@ -31,7 +42,8 @@ export default class WebcamRecorder extends React.Component {
 	}
 	handleStart(stream) {
 		this.setState({
-			recording: true
+			recording: true,
+      alreadyRecorded: true,
 		});
 
 		this.setStreamToVideo(stream);

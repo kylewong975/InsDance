@@ -13,7 +13,7 @@ export default class Stats extends React.Component {
   render() {
     return(
       <div style={styles.container}>
-        <p style={styles.desc}><i>{this.state.dance}</i></p>
+        <p style={styles.desc}><i>{this.props.danceType}</i></p>
         <br/><br/>
         <p style={styles.score}>Score: {this.state.score}</p>
         <p style={styles.highScore}>High Score: {this.state.maxScore}</p>

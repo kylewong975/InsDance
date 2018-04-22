@@ -9,6 +9,50 @@ import Stats from './Components/Stats';
 import WebcamRecorder from './Components/WebcamRecorder';
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      videoType: ["Moonwalk", "Cha Cha", "Dougie", "Salsa", "Tango", "Flamenco", "Hustle", "Tap Dance", "Charleston", "Samba"],
+      videoLink: ["https://www.youtube.com/watch?v=tjaT1bZ78Qs",
+        "https://www.youtube.com/watch?v=kmakB53NFow",
+        "https://www.youtube.com/watch?v=OvQ2jpVi07E",
+        "https://www.youtube.com/watch?v=G0g6pq8wK5k",
+        "https://www.youtube.com/watch?v=veiDkbYhZnY",
+        "https://www.youtube.com/watch?v=0VLMyr7MFTA",
+        "https://www.youtube.com/watch?v=EqwFL_0Y_Zk",
+        "https://www.youtube.com/watch?v=5xxTkB5bGy4",
+        "https://www.youtube.com/watch?v=fQSY-2VtBvg",
+        "https://www.youtube.com/watch?v=UCzOuCis9SU"
+      ],
+      chosenVideoType: "",
+      chosenVideoLink: "",
+      loadedVideo: false,
+    }
+
+    setInterval(() => {
+      if(this.state.loadedVideo == true) {
+        let ind = Math.floor(Math.random() * this.state.videoLink.length);
+        //console.log(ind);
+        this.setState({
+          loadedVideo: false,
+          chosenVideoType: this.state.videoType[ind],
+          chosenVideoLink: this.state.videoLink[ind],
+        })
+      }
+      //console.log(this.state.chosenVideoLink);
+      //console.log(this.state.chosenVideoType);
+    }, 5000);
+
+    this.getData = this.getData.bind(this);
+  }
+
+  getData(data) {
+    this.setState({
+      loadedVideo: data
+    })
+    console.log(data);
+  }
+
   render() {
     return (
       <div>
@@ -44,10 +88,11 @@ export default class App extends Component {
         <Container fluid style={styles.canvas}>
           <Row>
             <Col xs="8">
-              <WebcamRecorder />
+              <WebcamRecorder storeData={this.getData}/>
+              <p style={styles.desc}>Related Youtube video: {this.state.chosenVideoLink}</p>
             </Col>
             <Col xs="4">
-              <Stats />
+              <Stats danceType={this.state.chosenVideoType}/>
             </Col>
           </Row>
         </Container>
