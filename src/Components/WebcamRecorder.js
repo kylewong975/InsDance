@@ -67,7 +67,7 @@ export default class WebcamRecorder extends React.Component {
 	handleStart(stream) {
         // this.startTimer();  // start recording while timer == 0
 
-		let startDelay = 5000;
+		let startDelay = 1;
 
         setTimeout(() => {
                 this.setState({
@@ -126,10 +126,10 @@ export default class WebcamRecorder extends React.Component {
 		a.target = '_blank';
 		document.body.appendChild(a);
 
-    this.setState({
-      blobURL: url.substring(27) + ".webm"
-    });
-    //console.log(url.substring(27) + ".webm")
+        this.setState({
+          blobURL: url.substring(27) + ".webm"
+        });
+        //console.log(url.substring(27) + ".webm")
 
 		a.click();
 	}
