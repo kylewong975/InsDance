@@ -11,6 +11,7 @@ export default class WebcamRecorder extends React.Component {
 			recording: false,
 			paused: false,
       alreadyRecorded: false,
+      seconds: 5,
       blobURL: "",
 		};
 
@@ -24,6 +25,8 @@ export default class WebcamRecorder extends React.Component {
 		this.releaseStreamFromVideo = this.releaseStreamFromVideo.bind(this);
 		this.downloadVideo = this.downloadVideo.bind(this);
     this.analyze = this.analyze.bind(this);
+    this.countDown = this.countDown.bind(this);
+    this.startTimer = this.startTimer.bind(this);
 
     setInterval(() => {
       if(this.state.alreadyRecorded == true && this.state.recording == false) {
@@ -31,10 +34,27 @@ export default class WebcamRecorder extends React.Component {
         this.setState({
           alreadyRecorded: false,
         });
-        console.log("stored")
+        console.log("stored");
       }
     }, 5000);
 	}
+    startTimer() {
+      if (this.timer == 0) {
+        this.timer = setInterval(this.countDown, 1000);
+      }
+    }
+    countDown() {
+      // Remove one second, set state so a re-render happens.
+      let seconds = this.state.seconds - 1;
+      this.setState({
+        seconds: seconds,
+      });
+
+      // Check if we're at zero.
+      if (seconds == 0) {
+        clearInterval(this.timer);
+      }
+    }
 	handleGranted() {
 		this.setState({ granted: true });
 		console.log('Permission Granted!');
@@ -44,6 +64,9 @@ export default class WebcamRecorder extends React.Component {
 		console.log('Permission Denied!', err);
 	}
 	handleStart(stream) {
+        // while (this.timer != 0)
+        // this.startTimer();  // start recording while timer == 0
+
 		this.setState({
 			recording: true,
       alreadyRecorded: true,
@@ -172,3 +195,9 @@ let styles = {
     padding: 5
   }
 }
+
+/*
+<Row>
+  <h2 style={{color: "#ffffff"}}> s: {this.state.seconds} </h2>
+</Row>
+*/
