@@ -10,4 +10,5 @@ Have you ever had a time where you want to learn how to dance, perhaps for an up
 - A separate software, with the help of matplotlib, provides a frame by frame wire pose overlay to show the output of the OpenPose API
 
 ### Technologies Used
-The general technology stack looks somewhat complicated, but the figure below should clarify what is going on in the big picture. In general, we used React, HTML, CSS, and JavaScript for the frontend, Node.js on the web app's backend, Flask and ngrok server on the other backend to perform computations of OpenPose wireframes and run the Siamese Neural Network.
+The general tech stack looks somewhat complicated, but the figure below should clarify what is going on in the big picture. In general, we used React, HTML, CSS, and JavaScript for the frontend, Node.js on the web app's backend, Flask and ngrok server on the other backend to perform computations of OpenPose wireframes and run the Siamese Neural Network.
+![TechStack](screenshots/techstack.png)
