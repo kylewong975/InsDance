@@ -12,3 +12,5 @@ Have you ever had a time where you want to learn how to dance, perhaps for an up
 ### Technologies Used
 The general tech stack looks somewhat complicated, but the figure below should clarify what is going on in the big picture. In general, we used React, HTML, CSS, and JavaScript for the frontend, Node.js on the web app's backend, Flask and ngrok server on the other backend to perform computations of OpenPose wireframes and run the Siamese Neural Network.
 ![TechStack](screenshots/techstack.png)
+
+This repository contains the JavaScript (frontend/some backend) portion of the project. For the Python portion of the project, refer to https://github.com/willyjlee/InsDance
